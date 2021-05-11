@@ -55,6 +55,51 @@ const getPostAsync = async (data) => {
   })
 };
 //  practice //
+// 1)
+const appendToFile=(data)=>{
+  fs.appendFile("./data.txt",data,(err)=>{
+    if (err)
+      throw err;
+    console.log('Data appendToFile')
+  })
+}
+
+//2)
+const copyFile=(fileName)=>{
+  fs.copyFile(`./${fileName}.txt`,`copy_of_${fileName}.txt`,(err)=>{
+    if (err)
+      throw err
+    console.log("Done")
+  })
+}
+copyFile("data");
+
+//3)
+const newPost = JSON.stringify({
+  title: "JavaScript Basics",
+  body: "This post contains information about javaScript ",
+  // the id of the user who is going to create the post
+  userId: 1,
+});
+
+const createPost = (post) => {
+  post = JSON.parse(post);
+  axios
+    .post("https://jsonplaceholder.typicode.com/posts/", post)
+    .then((response) => {
+      console.log(response.data);
+    })
+    // in `.catch()` we add the code to handel the error
+    .catch((err) => {
+      throw err;
+    });
+};
+createPost(newPost);
+//4)
+
+
+
+
 
 
 
